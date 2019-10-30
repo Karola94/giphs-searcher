@@ -17,7 +17,7 @@ App = React.createClass({
                 var xhr = new XMLHttpRequest();
                 xhr.onload = function() {
                     if(xhr.status === 200) {
-                        resolve(this.response);
+                        resolve(response = JSON.parse(xhr.responseText).data);
                     } else {
                         reject(new Error(this.statusText));
                     }
@@ -32,8 +32,7 @@ App = React.createClass({
             });
         }
         httpGet(url)
-            .then(response => {
-                var data = JSON.parse(xhr.responseText).data;
+            .then(response => {                
                 var gif = {
                     url: data.fixed_width_downsampled_url,
                     sourceUrl: data.url
